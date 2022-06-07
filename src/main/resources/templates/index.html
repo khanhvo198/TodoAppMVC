@@ -1,0 +1,31 @@
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo App</title>
+</head>
+<body>
+    <a th:href="@{/new}"> Add Task</a>
+
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Task Name AAA asdasdasdasd</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="task : ${tasks}">
+                <td th:text="${task.taskName}"></td>
+                <td th:text="${task.isChecked}"></td>
+            </tr>
+        <p th:text="${tasks}"></p>
+        </tbody>
+    </table>
+
+
+
+</body>
+</html>
