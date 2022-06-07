@@ -11,7 +11,7 @@
     <table>
         <thead>
             <tr>
-                <th>Task Name AAA asdasdasdasd</th>
+                <th>Task Name</th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -20,8 +20,9 @@
             <tr th:each="task : ${tasks}">
                 <td th:text="${task.taskName}"></td>
                 <td th:text="${task.isChecked}"></td>
+                <td><a th:href="@{/edit/{id} (id=${task.id}) }">Edit</a></td>
+                <td><a th:href="@{/delete/{id} (id=${task.id}) }">Delete</a></td>
             </tr>
-        <p th:text="${tasks}"></p>
         </tbody>
     </table>
 

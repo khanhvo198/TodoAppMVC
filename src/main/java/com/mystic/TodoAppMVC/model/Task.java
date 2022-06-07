@@ -6,14 +6,6 @@ import java.io.Serializable;
 
 @Entity
 public class Task implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(updatable = false, nullable = false)
-    private Long id;
-    private String taskName;
-    private Boolean isChecked;
-
-
 
     public Long getId() {
         return id;
@@ -31,12 +23,19 @@ public class Task implements Serializable {
         this.taskName = taskName;
     }
 
-    public Boolean getChecked() {
-        return isChecked;
+    public boolean isChecked() {
+        return checked;
     }
 
-    public void setChecked(Boolean checked) {
-        isChecked = checked;
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(updatable = false, nullable = false)
+    private Long id;
+    private String taskName;
+    private boolean checked;
 
 }
