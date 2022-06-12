@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Create Task</title>
+    <title>Edit Task</title>
 </head>
 <body>
-    <form th:action="@{/create}" th:object="${task}" method="POST">
+<div layout:fragment="content">
+    <form th:action="@{/update}" th:object="${task}" method="POST">
         <input type="text" name="taskName" th:field="*{taskName}" th:value="*{taskName}" placeholder="Enter task name ... " /> <br/>
         <input type="checkbox" name="isChecked" th:checked="*{checked}" th:field="*{checked}" /> <br/>
         <button type="submit">Save</button> <br/>
+        <input type="hidden" th:field="*{id}" />
     </form>
+</div>
 </body>
 </html>

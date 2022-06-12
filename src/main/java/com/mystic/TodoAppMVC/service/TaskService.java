@@ -29,9 +29,7 @@ public class TaskService {
                 .orElseThrow(() -> new TaskNotFoundException("Task " + id + "was not found"));
     }
 
-    public Task updateTask(Task task) {
-        return taskRepo.save(task);
-    }
+    public Task updateTask(Task task) { return taskRepo.save(task); }
 
     public void deleteTaskById(Long id) {
         taskRepo.deleteById(id);
@@ -39,3 +37,4 @@ public class TaskService {
 
 
 }
+    

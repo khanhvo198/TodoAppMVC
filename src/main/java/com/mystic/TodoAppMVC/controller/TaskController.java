@@ -1,9 +1,8 @@
-package com.mystic.TodoAppMVC.controllers;
+package com.mystic.TodoAppMVC.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import com.mystic.TodoAppMVC.model.Task;
@@ -25,7 +24,7 @@ public class TaskController {
 
     @GetMapping("/new")
     public ModelAndView newTask() {
-        ModelAndView mav = new ModelAndView("create_task");
+        ModelAndView mav = new ModelAndView("create");
         Task newTask = new Task();
         mav.addObject("task", newTask);
         return  mav;
@@ -39,7 +38,7 @@ public class TaskController {
 
     @GetMapping("/edit/{id}")
     public ModelAndView editTask(@PathVariable("id") Long id) {
-        ModelAndView mav = new ModelAndView("edit_task");
+        ModelAndView mav = new ModelAndView("edit");
         Task task = taskService.findTaskById(id);
         mav.addObject("task", task);
         return mav;
