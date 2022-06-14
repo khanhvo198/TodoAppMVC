@@ -16,7 +16,7 @@ public class TaskController {
 
     @GetMapping("/")
     public ModelAndView index() {
-        ModelAndView mav = new ModelAndView("index");
+        ModelAndView mav = new ModelAndView("task/index");
         List<Task> tasks = taskService.findAllTasks();
         mav.addObject("tasks", tasks);
         return mav;
@@ -24,7 +24,7 @@ public class TaskController {
 
     @GetMapping("/new")
     public ModelAndView newTask() {
-        ModelAndView mav = new ModelAndView("create");
+        ModelAndView mav = new ModelAndView("task/create");
         Task newTask = new Task();
         mav.addObject("task", newTask);
         return  mav;
@@ -38,7 +38,7 @@ public class TaskController {
 
     @GetMapping("/edit/{id}")
     public ModelAndView editTask(@PathVariable("id") Long id) {
-        ModelAndView mav = new ModelAndView("edit");
+        ModelAndView mav = new ModelAndView("task/edit");
         Task task = taskService.findTaskById(id);
         mav.addObject("task", task);
         return mav;

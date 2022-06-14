@@ -1,0 +1,58 @@
+
+.top {
+  background-color: rgb(176, 126, 235);
+  color: white;
+  font-weight: 700;
+  height: 4rem;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.task-list {
+  background-color: white ;
+  height: 30rem;
+  width: 40%;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;  
+}
+
+
+
+.complete-icon {
+  height: 0.5rem;
+  width: 0.5rem;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 2px solid #000;
+  display: inline-block;
+}
+
+/* 
+.button-add-task {
+  border-radius: 18px;
+  background-color: rgb(176, 126, 235);
+  color: white;
+  padding: 5px 20px;
+  border: none;
+  margin-top: -20px;
+} */
+
+.add-task-wrapper {
+  width: 40%;
+  margin-top: 1rem;
+}
+
+.input-new-task {
+  width: 70%;
+}
+
+.button-new-task {
+  border-radius: 18px;
+  background-color: rgb(176, 126, 235);
+  color: white;
+  padding: 5px 20px;
+  border: none;
+}
