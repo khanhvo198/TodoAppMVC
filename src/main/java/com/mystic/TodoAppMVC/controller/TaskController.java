@@ -56,6 +56,19 @@ public class TaskController {
         return "redirect:/";
     }
 
+    @PostMapping("/update/{id}/complete")
+    public String updateTaskComplete(@PathVariable("id") Long id, @ModelAttribute Task updateTask ) {
+      Task task = taskService.findTaskById(id);
+      // System.out.print(task.isChecked());
+      // System.out.print(updateTask.isChecked());
+      task.setChecked(!task.isChecked());
+      // task.setChecked(updateTask.isChecked());
+      taskService.updateTask(task);
+      return "redirect:/";
+    }
+
+
+
 
 
 

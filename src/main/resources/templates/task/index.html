@@ -16,11 +16,11 @@
         </div>
         <div class="task-list">
           <div th:each="task : ${tasks}" class="task-item d-flex align-items-end justify-content-around mt-4">
-            <div class="d-flex" style="width: 50%">
-              <span class="complete-icon-wrapper">
-                <i class="complete-icon"></i>
+            <div class="d-flex" style="width: 50%;">
+              <span class="complete-icon-wrapper" th:attr="data-id=${task.id}" style="cursor: pointer;">
+                <i class="complete-icon" th:classappend="${task.isChecked} ? 'active-complete-icon' : ''"></i>
               </span>
-              <span class="task-name ms-5" th:text="${task.taskName}"></span>
+              <span class="task-name ms-5" th:text="${task.taskName}" th:classappend="${task.isChecked} ? 'active-task-name' : ''  " ></span>
             </div>
             <a class="trash-icon" th:href="@{/delete/{id} (id=${task.id}) }">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -45,8 +45,28 @@
         const btnCompleteTask = $(".complete-icon-wrapper")
 
         btnCompleteTask.on('click', function() {
-          $('.complete-icon').css("background-color", "rgb(176, 126, 235)")
-          $(".task-name").css('text-decoration', 'line-through')
+          const ref = $(this)
+          const id = ref.attr("data-id")
+          const child = ref.children()
+          const nextSib = ref.next()
+
+          if(child.hasClass('active-complete-icon')) {
+            child.removeClass('active-complete-icon')
+            nextSib.removeClass('active-task-name')
+          } else {
+            child.addClass('active-complete-icon')
+            nextSib.addClass('active-task-name')
+          }
+
+          $.ajax({
+            url: `http://localhost:8080/update/${id}/complete`,
+            method: 'POST',
+            data: {}
+          }).done(function() {
+
+          }).fail(function() {
+
+          })
         })
 
         btnNewTask.on("click", function() {
@@ -61,31 +81,10 @@
           }).done(function() {
             window.location = '/'
           }).fail(function() {
-            console.log("Fail")
+
           })
         })
       </script>
-      <!-- <a th:href="@{/new}"> Add Task</a>
-        <table>
-            <thead>
-                <tr>
-                    <th>Task Name</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr th:each="task : ${tasks}">
-                    <td th:text="${task.taskName}"></td>
-                    <td th:text="${task.isChecked}"></td>
-                    <td><a th:href="@{/edit/{id} (id=${task.id}) }">Edit</a></td>
-                    <td><a th:href="@{/delete/{id} (id=${task.id}) }">Delete</a></td>
-                </tr>
-            </tbody>
-        </table> -->
     </div>
-
 </body>
-
-
 </html>

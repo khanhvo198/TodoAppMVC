@@ -30,6 +30,14 @@
   display: inline-block;
 }
 
+.active-complete-icon {
+  background-color: rgb(176, 126, 235);
+}
+
+.active-task-name {
+  text-decoration: line-through;
+}
+
 /* 
 .button-add-task {
   border-radius: 18px;
