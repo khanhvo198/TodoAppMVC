@@ -2,6 +2,7 @@ package com.mystic.TodoAppMVC.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,7 +15,8 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @GetMapping("/")
+    @GetMapping("/tasks")
+    @PreAuthorize("hasRole('USER')")
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("task/index");
         List<Task> tasks = taskService.findAllTasks();
@@ -22,7 +24,8 @@ public class TaskController {
         return mav;
     }
 
-    @GetMapping("/new")
+    @GetMapping("/tasks/new")
+    @PreAuthorize("hasRole('USER')")
     public ModelAndView newTask() {
         ModelAndView mav = new ModelAndView("task/create");
         Task newTask = new Task();
@@ -30,13 +33,15 @@ public class TaskController {
         return  mav;
     }
 
-    @PostMapping("/create")
+    @PostMapping("/tasks/create")
+    @PreAuthorize("hasRole('USER')")
     public String createTask(@ModelAttribute Task task) {
         taskService.addTask(task);
-        return "redirect:/";
+        return "redirect:/tasks";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/tasks/edit/{id}")
+    @PreAuthorize("hasRole('USER')")
     public ModelAndView editTask(@PathVariable("id") Long id) {
         ModelAndView mav = new ModelAndView("task/edit");
         Task task = taskService.findTaskById(id);
@@ -44,24 +49,27 @@ public class TaskController {
         return mav;
     }
 
-    @PostMapping("/update")
+    @PostMapping("/tasks/update")
+    @PreAuthorize("hasRole('USER')")
     public String updateTask(@ModelAttribute Task task) {
         taskService.updateTask(task);
-        return "redirect:/";
+        return "redirect:/tasks";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/tasks/delete/{id}")
+    @PreAuthorize("hasRole('USER')")
     public String deleteTask(@PathVariable("id") Long id) {
         taskService.deleteTaskById(id);
-        return "redirect:/";
+        return "redirect:/tasks";
     }
 
-    @PostMapping("/update/{id}/complete")
+    @PostMapping("/tasks/update/{id}/complete")
+    @PreAuthorize("hasRole('USER')")
     public String updateTaskComplete(@PathVariable("id") Long id, @ModelAttribute Task updateTask ) {
       Task task = taskService.findTaskById(id);
       task.setChecked(!task.isChecked());
       taskService.updateTask(task);
-      return "redirect:/";
+      return "redirect:/tasks";
     }
 
 
