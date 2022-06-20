@@ -16,7 +16,7 @@ public class TaskController {
     private TaskService taskService;
 
     @GetMapping("/tasks")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("task/index");
         List<Task> tasks = taskService.findAllTasks();
@@ -25,7 +25,7 @@ public class TaskController {
     }
 
     @GetMapping("/tasks/new")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public ModelAndView newTask() {
         ModelAndView mav = new ModelAndView("task/create");
         Task newTask = new Task();
@@ -34,14 +34,14 @@ public class TaskController {
     }
 
     @PostMapping("/tasks/create")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public String createTask(@ModelAttribute Task task) {
         taskService.addTask(task);
         return "redirect:/tasks";
     }
 
     @GetMapping("/tasks/edit/{id}")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public ModelAndView editTask(@PathVariable("id") Long id) {
         ModelAndView mav = new ModelAndView("task/edit");
         Task task = taskService.findTaskById(id);
@@ -50,21 +50,21 @@ public class TaskController {
     }
 
     @PostMapping("/tasks/update")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public String updateTask(@ModelAttribute Task task) {
         taskService.updateTask(task);
         return "redirect:/tasks";
     }
 
     @GetMapping("/tasks/delete/{id}")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public String deleteTask(@PathVariable("id") Long id) {
         taskService.deleteTaskById(id);
         return "redirect:/tasks";
     }
 
     @PostMapping("/tasks/update/{id}/complete")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public String updateTaskComplete(@PathVariable("id") Long id, @ModelAttribute Task updateTask ) {
       Task task = taskService.findTaskById(id);
       task.setChecked(!task.isChecked());

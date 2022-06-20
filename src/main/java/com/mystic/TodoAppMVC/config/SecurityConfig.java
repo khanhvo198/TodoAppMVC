@@ -9,13 +9,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -26,6 +22,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig {
 
     private final UserService userService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -33,7 +30,8 @@ public class SecurityConfig {
                 csrf().disable().
                 authorizeRequests((authz) -> authz
                         .antMatchers("/css/*","/js/*").permitAll()
-                        .antMatchers("/tasks/**").hasRole("USER")
+                        .antMatchers("/registration").permitAll()
+                        .antMatchers("/tasks/**").hasAuthority("USER")
                         .anyRequest()
                         .authenticated()
                 )
@@ -57,31 +55,29 @@ public class SecurityConfig {
     }
 
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationManagerBuilder auth, PasswordEncoder encoder) throws Exception {
-            auth
-                .userDetailsService(userService)
-                .passwordEncoder(encoder);
+//    @Bean
+//    public AuthenticationManager authenticationManager(AuthenticationManagerBuilder auth, PasswordEncoder encoder) throws Exception {
+//            auth
+//                .userDetailsService(userService)
+//                .passwordEncoder(encoder);
+//
+//            return auth.build();
+//    }
 
-            return auth.build();
-    }
+//    @Bean
+//    public PasswordEncoder encoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 
-    @Bean
-    public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-
-
-    @Bean
-    public UserDetailsManager userDetailsManager() {
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
-        UserDetails user = User.withUsername("MyStic")
-                                .password(encoder.encode("asdsasfd"))
-                                .roles("USER")
-                                .build();
-        return new InMemoryUserDetailsManager(user);
-    }
+//    @Bean
+//    public UserDetailsManager userDetailsManager() {
+//        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+//
+//        UserDetails user = User.withUsername("MyStic")
+//                                .password(encoder.encode("asdsasfd"))
+//                                .roles("USER")
+//                                .build();
+//        return new InMemoryUserDetailsManager(user);
+//    }
 
 }
