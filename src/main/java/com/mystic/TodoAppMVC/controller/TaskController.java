@@ -1,20 +1,20 @@
 package com.mystic.TodoAppMVC.controller;
 
-import java.util.List;
-
+import com.mystic.TodoAppMVC.model.Task;
 import com.mystic.TodoAppMVC.model.User;
+import com.mystic.TodoAppMVC.service.TaskService;
 import com.mystic.TodoAppMVC.service.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import com.mystic.TodoAppMVC.model.Task;
-import com.mystic.TodoAppMVC.service.TaskService;
+
+import java.util.List;
 
 
 @Controller
@@ -22,8 +22,6 @@ import com.mystic.TodoAppMVC.service.TaskService;
 public class TaskController {
 
     private TaskService taskService;
-    private UserService userService;
-
     @GetMapping("/tasks")
     @PreAuthorize("hasAuthority('USER')")
     public ModelAndView index(@AuthenticationPrincipal User user) {

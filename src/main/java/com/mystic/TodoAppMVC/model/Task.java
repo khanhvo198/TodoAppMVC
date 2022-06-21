@@ -1,5 +1,6 @@
 package com.mystic.TodoAppMVC.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,8 +12,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class Task implements Serializable {
-
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
