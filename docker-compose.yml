@@ -1,0 +1,28 @@
+version: '3.8'
+#containers => services
+services:
+  mysqldb:
+    image: mysql:8.0.28
+    ports:
+      - "3307:3306"
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - backend
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: task_manager
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/app
+    networks:
+      - backend
+networks:
+  backend:
+volumes:
+  db:
