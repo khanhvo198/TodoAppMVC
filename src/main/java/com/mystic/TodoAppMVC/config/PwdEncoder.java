@@ -1,4 +1,4 @@
-package com.mystic.TodoAppMVC.crypto;
+package com.mystic.TodoAppMVC.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

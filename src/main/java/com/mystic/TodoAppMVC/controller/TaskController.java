@@ -1,8 +1,15 @@
 package com.mystic.TodoAppMVC.controller;
 
 import java.util.List;
+
+import com.mystic.TodoAppMVC.model.User;
+import com.mystic.TodoAppMVC.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -11,15 +18,17 @@ import com.mystic.TodoAppMVC.service.TaskService;
 
 
 @Controller
+@AllArgsConstructor
 public class TaskController {
-    @Autowired
+
     private TaskService taskService;
+    private UserService userService;
 
     @GetMapping("/tasks")
     @PreAuthorize("hasAuthority('USER')")
-    public ModelAndView index() {
+    public ModelAndView index(@AuthenticationPrincipal User user) {
         ModelAndView mav = new ModelAndView("task/index");
-        List<Task> tasks = taskService.findAllTasks();
+        List<Task> tasks = taskService.findByUserId(user.getId());
         mav.addObject("tasks", tasks);
         return mav;
     }
@@ -35,7 +44,8 @@ public class TaskController {
 
     @PostMapping("/tasks/create")
     @PreAuthorize("hasAuthority('USER')")
-    public String createTask(@ModelAttribute Task task) {
+    public String createTask(@ModelAttribute Task task, @AuthenticationPrincipal User user) {
+        task.setUser(user);
         taskService.addTask(task);
         return "redirect:/tasks";
     }

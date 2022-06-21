@@ -24,6 +24,10 @@ public class TaskService {
         return taskRepo.findAll();
     }
 
+    public List<Task> findByUserId(Long userId) {
+        return taskRepo.findByUserId(userId);
+    }
+
     public Task findTaskById(Long id) {
         return taskRepo.findTaskById(id)
                 .orElseThrow(() -> new TaskNotFoundException("Task " + id + "was not found"));
