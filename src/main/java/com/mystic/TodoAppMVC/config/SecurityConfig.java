@@ -1,12 +1,13 @@
 package com.mystic.TodoAppMVC.config;
 
-import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
+
+import lombok.AllArgsConstructor;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -20,7 +21,7 @@ public class SecurityConfig {
         http.
                 csrf().disable().
                 authorizeRequests((authz) -> authz
-                        .antMatchers("/css/*","/js/*").permitAll()
+                        .antMatchers("/css/**","/js/**").permitAll()
                         .antMatchers("/registration").permitAll()
                         .antMatchers("/tasks/**").hasAuthority("USER")
                         .anyRequest()
@@ -28,11 +29,16 @@ public class SecurityConfig {
                 )
                 .httpBasic(withDefaults())
                 .formLogin()
-                    .defaultSuccessUrl("/tasks")
+                    .loginPage("/login")
+                    .usernameParameter("email")
+                    .defaultSuccessUrl("/tasks", true)
                     .permitAll()
                     .and()
                 .logout()
-                    .permitAll();
+                    .permitAll()
+                .and()
+                .rememberMe()
+                .key("uniqueAndSecret");
 
 
         return http.build();
