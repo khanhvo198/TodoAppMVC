@@ -1,0 +1,41 @@
+body, html {
+  height: 100%;
+  font-size: 16px;
+  font-family: "Space Grotesk";
+}
+
+
+.text-title {
+  font-size: 1.5rem ;
+  font-style: bold;
+  font-weight: 700;
+  padding-bottom: 5rem;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.text-already-user {
+  color: #C4C4C4;
+}
+
+.text-login {
+  color: #476D73;
+}
+
+.btn-submit {
+  background-color: #27485D;
+  color:white;
+}
+
+.wrapper-right {
+  background: rgb(238,174,202);
+  background: linear-gradient(317deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 0%, rgba(81,120,121,1) 52%);
+  color: white;
+}
+
+.quote {
+  font-size: 5rem;
+}
+
+.author {
+  flex: start;
+}

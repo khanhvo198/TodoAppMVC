@@ -1,31 +1,57 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Space Grotesk" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/registration/registration.css}">
     <title>Registration</title>
 </head>
 <body>
+<div class="container-fluid h-100">
+    <div class="row h-100">
+        <div class="wrapper-left col-md-7">
+            <form class="d-flex justify-content-center align-items-center flex-column h-100" method="post" th:action="@{/registration}">
+                <span class="w-50 text-title">Let's get you started</span>
+                <div class="mb-3 w-50">
+                    <label class="form-label">First name</label>
+                    <input type="text" name="firstName" class="form-control" />
+                </div>
+                <div class="mb-3  w-50">
+                    <label class="form-label">Last name</label>
+                    <input type="text" name="lastName" class="form-control" />
+                </div>
+                <div class="mb-3  w-50">
+                    <label class="form-label">Email</label>
+                    <input type="email"     name="email" class="form-control" />
+                </div>
+                <div class="mb-3 w-50">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password"  class="form-control"/>
+                </div>
+                <button type="submit" class="btn w-50 mt-3 btn-submit">Submit</button>
+                <div class="mt-5">
+                    <span class="text-already-user">Already a user.</span> <a th:href="@{/login}" class="text-login">Login</a>
+                </div>
+            </form>
 
-    <form th:action="@{/registration}" method="POST">
-        <div>
-            <label>FirstName</label>
-            <input name="firstName" type="text" />
         </div>
-        <div>
-            <label>LastName</label>
-            <input name="lastName" type="text" />
-        </div>
-        <div>
-            <label>Email</label>
-            <input name="email" type="text" />
-        </div>
+        <div class="wrapper-right col-md-5 d-flex justify-content-center align-items-center flex-column">
+            <div class="quote text-center">
+                “Creativity is intelligence having fun”
+            </div>
+            <div class="author">
+                -Albert Einstein
+            </div>
 
-        <div>
-            <label>Password</label>
-            <input name="password" type="password" />
-        </div>
-        <button type="submit">Register</button>
-    </form>
 
+
+        </div>
+    </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
