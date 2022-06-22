@@ -1,3 +1,20 @@
+.wrapper-top {
+    background-color: rgb(176, 126, 235);
+    color: white;
+    height: 4rem;
+    width: 40%;
+}
+
+.wrapper-top__title {
+  color: white;
+  font-weight: 700;
+}
+
+.wrapper-top__logout a {
+    text-decoration: none;
+    font-size: 0.8rem;
+    color: white;
+}
 
 .top {
   background-color: rgb(176, 126, 235);
@@ -6,7 +23,7 @@
   height: 4rem;
   width: 40%;
   display: flex;
-  justify-content: center;
+  justify-content: around;
   align-items: center;
 }
 

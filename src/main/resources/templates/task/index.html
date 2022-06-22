@@ -11,8 +11,11 @@
 <body>
     <div layout:fragment="content" class="main w-100 h-100 d-flex justify-content-center align-items-center">
       <div class="wrapper-task w-100 d-flex flex-column justify-content-center align-items-center">
-        <div class="top">
-          Website todo
+        <div class="wrapper-top">
+          <div class="d-flex justify-content-around align-items-center h-100">
+            <div class="wrapper-top__title">Website todo</div>
+            <div class="wrapper-top__logout"><a th:href="@{/logout}">Log out</a></div>
+          </div>
         </div>
         <div class="task-list">
           <div th:each="task : ${tasks}" class="task-item d-flex align-items-end justify-content-around mt-4">
