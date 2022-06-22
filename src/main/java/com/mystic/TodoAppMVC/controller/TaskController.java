@@ -1,10 +1,7 @@
 package com.mystic.TodoAppMVC.controller;
 
-import com.mystic.TodoAppMVC.model.Task;
-import com.mystic.TodoAppMVC.model.User;
-import com.mystic.TodoAppMVC.service.TaskService;
-import com.mystic.TodoAppMVC.service.UserService;
-import lombok.AllArgsConstructor;
+import java.util.List;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -14,7 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import com.mystic.TodoAppMVC.model.Task;
+import com.mystic.TodoAppMVC.model.User;
+import com.mystic.TodoAppMVC.service.TaskService;
+
+import lombok.AllArgsConstructor;
 
 
 @Controller
