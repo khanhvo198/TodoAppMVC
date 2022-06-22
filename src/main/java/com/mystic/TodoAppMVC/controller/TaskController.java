@@ -23,7 +23,7 @@ import lombok.AllArgsConstructor;
 public class TaskController {
 
     private TaskService taskService;
-    @GetMapping("/tasks")
+    @GetMapping({"/tasks", "/"})
     @PreAuthorize("hasAuthority('USER')")
     public ModelAndView index(@AuthenticationPrincipal User user) {
         ModelAndView mav = new ModelAndView("task/index");
