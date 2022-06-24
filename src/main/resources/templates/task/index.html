@@ -62,7 +62,7 @@
           }
 
           $.ajax({
-            url: `https://mystic-springboot-mvc.herokuapp.com/tasks/update/${id}/complete`,
+            url: `/tasks/update/${id}/complete`,
             method: 'POST',
             data: {}
           }).done(function() {
@@ -76,7 +76,7 @@
           const text = $(".input-new-task").val()
           if(text == "") return
           $.ajax({
-            url: 'https://mystic-springboot-mvc.herokuapp.com/tasks/create',
+            url: "/tasks/create",
             method: 'POST',
             data: {
               taskName: text,
