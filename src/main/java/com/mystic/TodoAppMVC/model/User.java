@@ -18,6 +18,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
+@Table(name="my_user")
 public class User implements UserDetails {
 
 
