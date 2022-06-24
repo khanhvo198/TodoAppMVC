@@ -19,7 +19,7 @@ public class RegistrationController {
     private final RegistrationService registrationService;
     @GetMapping("/registration")
     public ModelAndView newUser() {
-        return new ModelAndView("/registration/registration");
+        return new ModelAndView("registration/registration");
     }
 
     @PostMapping("/registration")
