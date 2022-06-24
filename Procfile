@@ -1,1 +1,1 @@
-web: java -jar build/libs/rate-0.0.1-SNAPSHOT.jar
+web: java -Xmx384m -Xss512k -XX:+UseCompressedOops -jar target/*.jar --spring.profiles.active=prod --server.port=$PORT  --spring.datasource.heroku-url=JDBC_DATABASE_URL
