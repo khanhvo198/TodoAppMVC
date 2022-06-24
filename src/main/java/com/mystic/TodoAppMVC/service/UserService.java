@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.mystic.TodoAppMVC.DTO.UserDTO;
 import com.mystic.TodoAppMVC.model.User;
 import com.mystic.TodoAppMVC.repo.UserRepo;
 
@@ -20,19 +21,22 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepo.findByEmail(email)
-                .orElseThrow(()->
-                        new UsernameNotFoundException(
-                                String.format("User %s not found", email)));
+      return userRepo.findByEmail(email)
+              .orElseThrow(()->
+                      new UsernameNotFoundException(
+                              String.format("User %s not found", email)));
 
     }
 
 
     public void signUpUser(User user) {
-        String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
-        userRepo.save(user);
+      String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+      user.setPassword(encodedPassword);
+      userRepo.save(user);
     }
 
-
+    public boolean isExist(UserDTO user) {
+        return userRepo.findByEmail(user.getEmail()).isPresent();
+    }
+    
 }
