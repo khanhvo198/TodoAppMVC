@@ -9,7 +9,7 @@ If you have Docker, you can run it via command:
 After that, visit ```localhost:8080``` and try it
 
 # Try it on web
-You can this on [website](https://mystic-springboot-mvc.herokuapp.com/)
+You can try it on [website](https://mystic-springboot-mvc.herokuapp.com/)
 
 
 # Main feature:
